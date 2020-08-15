@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Dice</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio src="sounds/do.mp3" id="audioUno"></audio>
+    <audio src="sounds/re.mp3" id="audioDos"></audio>
+    <audio src="sounds/mi.mp3" id="audioTres"></audio>
+    <audio src="sounds/fa.mp3" id="audioCuatro"></audio>
+    
+    <!-- <p id="estado" role="alert">TOCA COMENZAR PARA JUGAR</p>
+
+    <p id="ronda">Ronda #<strong id="numeroRonda"></strong></p> -->
+
+    <div class="container">
+        
+        <p id="estado" role="alert">TOCA COMENZAR PARA JUGAR</p>
+        
+        <p id="ronda">Ronda #<strong id="numeroRonda"></strong></p>
+        
+        <div class="container2">
+            <div class="cuadro" id="cuadroRojo"></div>
+            <div class="cuadro" id="cuadroAmarillo"></div>
+            <div class="cuadro" id="cuadroVerde"></div>
+            <div class="cuadro" id="cuadroAzul"></div>
+        </div>
+        <button type="button" id="boton">COMENZAR</button>
+    </div>
+
+    <script src="js/script.js"></script>
+    
+</body>
+</html>
