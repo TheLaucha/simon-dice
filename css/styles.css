@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family: 'Covered By Your Grace', cursive;
+    font-family: 'Courier New', Courier, monospace;
     background: rgba(52,208,247,1);
     background: -moz-linear-gradient(left, rgba(52,208,247,1) 0%, rgba(93,235,240,1) 32%, rgba(12,245,226,1) 64%, rgba(39,230,192,1) 100%);
     background: -webkit-linear-gradient(left, rgba(52,208,247,1) 0%, rgba(93,235,240,1) 32%, rgba(12,245,226,1) 64%, rgba(39,230,192,1) 100%);
@@ -58,6 +58,31 @@ body {
     justify-items: center;
     justify-content: center;
     margin: 10px 0px;
+}
+
+.dificultades{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.dificultad{
+    width: 100px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #ecab41;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+}
+
+.dificultad:hover{
+    cursor: pointer;
+    background-color: #db9525;
+    transition: all 300ms;
+}
+
+.dificultad:focus {
+    outline: none;
 }
 
 .cuadro {

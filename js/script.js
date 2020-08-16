@@ -2,6 +2,8 @@ const audioUno = document.querySelector("#audioUno");
 const audioDos = document.querySelector("#audioDos");
 const audioTres = document.querySelector("#audioTres");
 const audioCuatro = document.querySelector("#audioCuatro");
+const audioBien = document.querySelector("#audioBien");
+const audioMal = document.querySelector("#audioMal");
 
 let secuenciaMaquina = [];
 let secuenciaUsuario = [];
@@ -12,6 +14,34 @@ const SOUNDS = {
     play2: () => audioDos.play(),
     play3: () => audioTres.play(),
     play4: () => audioCuatro.play(),
+    playBien: () => audioBien.play(),
+    playMal: () => audioMal.play(),
+}
+
+const $facil = document.querySelector("#facil");
+const $medio = document.querySelector("#medio");
+const $dificil = document.querySelector("#dificil");
+let dificultad = 1000;
+
+$facil.onclick = function(){
+    dificultad = 1000;
+    $facil.style.backgroundColor = "#e6c288";
+    $medio.style.backgroundColor = "#db9525";
+    $dificil.style.backgroundColor = "#db9525";
+}
+
+$medio.onclick = function(){
+    dificultad = 500;
+    $facil.style.backgroundColor = "#db9525";
+    $medio.style.backgroundColor = "#e6c288";
+    $dificil.style.backgroundColor = "#db9525";
+}
+
+$dificil.onclick = function(){
+    dificultad = 400;
+    $facil.style.backgroundColor = "#db9525";
+    $medio.style.backgroundColor = "#db9525";
+    $dificil.style.backgroundColor = "#e6c288";
 }
 
 
@@ -45,10 +75,10 @@ function manejarRonda(){
     const $nuevoCuadro = obtenerCuadroAleatorio($cuadros);
     secuenciaMaquina.push($nuevoCuadro);
 
-    const RETRASO_TURNO_JUGADOR = (secuenciaMaquina.length + 1) * 1000;
+    const RETRASO_TURNO_JUGADOR = (secuenciaMaquina.length + 1) * dificultad;
     
     secuenciaMaquina.forEach(function(cuadro,index){
-        const RETRASO_MS = (index + 1) * 1000;
+        const RETRASO_MS = (index + 1) * dificultad;
         setTimeout(function(){
             resaltar(cuadro);
             audio(cuadro);
@@ -61,6 +91,7 @@ function manejarRonda(){
     }, RETRASO_TURNO_JUGADOR)
 
     secuenciaUsuario = [];
+    
     ronda++;
     actualizarNumeroDeRondas(ronda)
 }
@@ -73,17 +104,17 @@ function manejarInputUsuario(e){
     secuenciaUsuario.push($cuadro);
 
     const $cuadroMaquina = secuenciaMaquina[secuenciaUsuario.length - 1];
-    console.log($cuadroMaquina.id)
-
 
     if ($cuadro.id !== $cuadroMaquina.id){
+        SOUNDS.playMal();
         perder();
         return;
     }
 
     if (secuenciaMaquina.length === secuenciaUsuario.length){
+        SOUNDS.playBien();
         bloquearInputUsuario();
-        setTimeout(manejarRonda,1000);
+        setTimeout(manejarRonda,dificultad);
     }
 }
 
@@ -128,7 +159,7 @@ function resaltar(cuadro){
     setTimeout(function(){
         cuadro.style.opacity = 0.5;
         cuadro.style.transform = "scale(1.0)";
-    }, 500)
+    }, dificultad / 2)
 }
 
 function desbloquearInputUsuario(){
@@ -140,12 +171,12 @@ function desbloquearInputUsuario(){
 
 function perder(){
     bloquearInputUsuario();
+    
     actualizarEstado("Perdiste! - Toca Comenzar para volver a jugar");
 
 }
 
 function audio(cuadro){
-    console.log(cuadro.id)
     if (cuadro.id == "cuadroRojo"){
         SOUNDS.play1();
     }
@@ -158,4 +189,10 @@ function audio(cuadro){
     if (cuadro.id == "cuadroAzul"){
         SOUNDS.play4();
     }
+}
+
+function establecerDificultad(segundos){
+    let nivel = 1000;
+    nivel = segundos;
+    return nivel;
 }
